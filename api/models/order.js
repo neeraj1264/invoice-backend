@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
   timestamp: { type: String, required: true },
   discount:{ type: Number, default: 0  },
   delivery: { type: Number, default: 0  }
-});
+}, { strict: true });
 
 const Order = mongoose.model('Order', orderSchema);
 
