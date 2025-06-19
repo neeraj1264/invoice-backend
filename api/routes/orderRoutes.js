@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
 
+console.log("✅ Orders route file loaded");
+
 // Create a new order
 router.post('/', async (req, res) => {
+    console.log("🔥 POST /api/orders hit");
+
   try {
+        console.log("Backend received order:", req.body); // ⬅️ Add this
+
     const { id, products, totalAmount, timestamp, name, phone, address, discount, delivery } = req.body;
     const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address, discount, delivery  });
 
