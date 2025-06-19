@@ -2,23 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
 
-console.log("✅ Orders route file loaded");
-
 // Create a new order
 router.post('/', async (req, res) => {
-    console.log("🔥 POST /api/orders hit");
-
   try {
-        console.log("Backend received order:", req.body); // ⬅️ Add this
-console.log("→ req.body.discount:", req.body.discount);
-console.log("→ req.body.delivery:", req.body.delivery);
+    const { id, products, totalAmount, timestamp, name, phone, address } = req.body;
+    const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address });
 
-    const { id, products, totalAmount, timestamp, name, phone, address, discount, delivery } = req.body;
-    const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address, discount, delivery });
-console.log("→ newOrder (pre‑save):", newOrder);
-await newOrder.save();
-console.log("→ newOrder (post‑save):", newOrder);
-
+    await newOrder.save();
     res.status(201).json(newOrder);
   } catch (error) {
     res.status(500).json({ message: 'Failed to create order', error });
