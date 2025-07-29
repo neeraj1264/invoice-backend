@@ -16,7 +16,8 @@ router.post('/', async (req, res) => {
     const tokens = await tokensRes.json();
 
     for (let token of tokens) {
-      await fetch('https://exp.host/--/api/v2/push/send', {
+      if (!token.startsWith('ExponentPushToken')) continue;
+    const response = await fetch('https://exp.host/--/api/v2/push/send', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -27,8 +28,15 @@ router.post('/', async (req, res) => {
           to: token,
           title: 'New Order Received',
           body: `Order #${id} • ₹${totalAmount}`,
+          sound: 'default',
         }),
       });
+       const result = await response.json();
+  if (result.data && result.data.status === 'ok') {
+    console.log(`✅ Notification sent to ${token}`);
+  } else {
+    console.error(`❌ Failed to send to ${token}`, result);
+  }
     }
     
     res.status(201).json(newOrder);
@@ -52,8 +60,6 @@ router.get('/test', (req, res) => {
     res.status(200).send('Orders test route working');
   });  
   
-module.exports = router;
-
   // Delete an order
   router.delete('/:id', async (req, res) => {
     try {
@@ -69,3 +75,5 @@ module.exports = router;
       res.status(500).json({ message: 'Failed to delete order', error });
     }
   });
+
+module.exports = router;
