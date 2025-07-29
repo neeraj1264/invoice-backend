@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
      // Fetch all device tokens
     const tokensRes = await fetch('http://localhost:5000/api/notifications/tokens');
     const tokens = await tokensRes.json();
+console.log('Fetched Tokens:', tokens);
 
     for (let token of tokens) {
       if (!token.startsWith('ExponentPushToken')) continue;
