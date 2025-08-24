@@ -6,8 +6,8 @@ const fetch = require('node-fetch');
 // Create a new order
 router.post('/', async (req, res) => {
   try {
-    const { id, products, totalAmount, timestamp, name, phone, address } = req.body;
-    const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address });
+    const { id, products, totalAmount, timestamp, name, phone, address, orderNumber, billNumber, orderType } = req.body;
+    const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address, orderNumber, billNumber, orderType });
 
     await newOrder.save();
 
