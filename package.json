@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "api/index.js",
-    "scripts": {
+  "scripts": {
+    "start": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.1",
+    "nodemailer": "^7.0.5",
+    "pdfkit": "^0.17.1",
     "serialport": "^13.0.0",
     "serverless-http": "^3.2.0",
     "uuid": "^11.0.3"
