@@ -11,6 +11,9 @@ const orderSchema = new mongoose.Schema({
   orderNumber: { type: String },
   billNumber: { type: String },
   orderType: {type: String},
+  paymentMethod: {type: String},
+  upiAmount: { type: Number },
+  cashAmount:{ type: Number },
 });
 
 const Order = mongoose.model('Order', orderSchema);
